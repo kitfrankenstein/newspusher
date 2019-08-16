@@ -53,25 +53,27 @@ public class NewsServiceImpl implements NewsService {
                     //标题（title或mtitle）、url（url）、内容提要（intro或无）
                     //来源（media或无、时间（ctime或mtime）、题图（thumb或mthumbs或thumbs)
                     String url = jO.getString("url");
-                    String title = jO.containsKey("title")
-                            ? jO.getString("title")
-                            : jO.getString("mtitle");
-                    String desc = jO.containsKey("intro")
-                            ? NewsUtil.subLength(jO.getString("intro"), 40)
-                            : "";
-                    String media = jO.containsKey("media")
-                            ? jO.getString("media")
-                            : "新浪网";
-                    String imageUrl = jO.containsKey("thumb") ? jO.getString("thumb")
-                            : (jO.containsKey("mthumbs")
+                    if (url.startsWith("http")) {
+                        String title = jO.containsKey("title")
+                                ? jO.getString("title")
+                                : jO.getString("mtitle");
+                        String desc = jO.containsKey("intro")
+                                ? NewsUtil.subLength(jO.getString("intro"), 40)
+                                : "";
+                        String media = jO.containsKey("media")
+                                ? jO.getString("media")
+                                : "新浪网";
+                        String imageUrl = jO.containsKey("thumb") ? jO.getString("thumb")
+                                : (jO.containsKey("mthumbs")
                                 ? jO.getJSONArray("mthumbs").getString(0)
                                 : jO.getJSONArray("thumbs").getString(0));
-                    String time = media + " " +
-                            (jO.containsKey("ctime")
-                                    ? NewsUtil.stampToDateString(jO.getString("ctime"))
-                                    : NewsUtil.stampToDateString(jO.getString("mtime")));
-                    News news = new News(url, title, desc, time, imageUrl, tags[i]);
-                    newsList.add(news);
+                        String time = media + " " +
+                                (jO.containsKey("ctime")
+                                        ? NewsUtil.stampToDateString(jO.getString("ctime"))
+                                        : NewsUtil.stampToDateString(jO.getString("mtime")));
+                        News news = new News(url, title, desc, time, imageUrl, tags[i]);
+                        newsList.add(news);
+                    }
                 }
             }
         } catch (IOException e) {
@@ -189,6 +191,9 @@ public class NewsServiceImpl implements NewsService {
 
     @Override
     public List<News> getNewsList(String table, String lastUrl, int limit) {
+        if (table.equals("163")) {
+            table = NewsUtil.TABLE_163;
+        }
         return newsDao.getNewsListByOffset(table, newsDao.getNewsRow(lastUrl, table), limit);
     }
 
