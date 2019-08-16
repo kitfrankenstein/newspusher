@@ -1,0 +1,34 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>NewsPusher后台管理</title>
+    <link rel="shortcut icon" href="/newsPusher/favicon.ico">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}">
+    <script type="text/javascript" th:src="@{/js/jquery-3.4.1.js}"></script>
+    <script type="text/javascript" th:src="@{/js/md5.js}"></script>
+    <script type="text/javascript" th:src="@{/js/login.js}"></script>
+</head>
+<body>
+<div class="tip">
+    <button id="download" onclick="download()" class="btn">下载apk</button>
+</div>
+<section class="container">
+    <h1 class="title1">管理员登录</h1>
+    <section class="box">
+        <div class="top">
+            <a th:href="@{/view/login}" class="active2">登录</a>
+            <a th:href="@{/view/register}">注册</a>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control user" placeholder="手机号" id="phone">
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control password" placeholder="密码" id="password">
+        </div>
+        <div class="form-group" style="margin-top:60px">
+            <button id="submit" onclick="login()">登录</button>
+        </div>
+    </section>
+</section>
+</body>
+</html>

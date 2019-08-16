@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kitfrankenstein.newspusher.dao.NewsDao">
+    <select id="getNewsRow" resultType="int">
+        select IFNULL(MAX(rowsnumber),0) AS rowsnumber
+        from
+          (select url, @rownum:=@rownum+1 as rowsnumber
+          from ${table},(select @rownum:=0) r
+          order by time_stamp desc) t
+        where url = #{newsUrl}
+    </select>
+
+    <select id="getNewsListByOffset" resultType="com.kitfrankenstein.newspusher.entity.News">
+        select url,title,digest,time,img_url,tag
+        from ${table}
+        order by time_stamp desc
+        limit #{offset},#{limit}
+    </select>
+
+    <select id="getNewsListByTime" resultType="com.kitfrankenstein.newspusher.entity.News">
+        select url,title,digest,time,img_url,tag
+        from ${table}
+        where time_stamp >= #{time}
+        order by time_stamp desc
+    </select>
+
+    <insert id="addNews">
+        insert ignore into ${table}(url,title,digest,time,img_url,tag)
+        values(#{news.url},#{news.title},#{news.digest},#{news.time},#{news.imgUrl},#{news.tag});
+    </insert>
+
+    <insert id="addNewsList">
+        insert ignore into ${table}(url,title,digest,time,img_url,tag)
+        value
+        <foreach collection="newsList" item="item" separator=",">
+            (#{item.url},#{item.title},#{item.digest},#{item.time},#{item.imgUrl},#{item.tag})
+        </foreach>
+    </insert>
+
+    <select id="searchNews" resultType="com.kitfrankenstein.newspusher.entity.News">
+        <bind name="keyword" value="'%' + keyword + '%'"/>
+        select url,title,digest,time,img_url,tag
+        from
+        (select url,title,digest,time,img_url,time_stamp,tag
+        from sina
+        where title like #{keyword}
+        union
+        select url,title,digest,time,img_url,time_stamp,tag
+        from netease
+        where title like #{keyword}
+        union
+        select url,title,digest,time,img_url,time_stamp,tag
+        from mchina
+        where title like #{keyword}) sr
+        order by time_stamp desc;
+    </select>
+
+    <select id="getCount" resultType="int">
+        select count(*)
+        from ${table};
+    </select>
+</mapper>

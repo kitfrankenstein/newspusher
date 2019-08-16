@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kitfrankenstein.newspusher.dao.UserDao">
+    <select id="getUserByPhone" resultType="com.kitfrankenstein.newspusher.entity.User">
+        select phonenumber,password
+        from user
+        where phonenumber=#{phoneNumber}
+    </select>
+
+    <select id="getUser" resultType="com.kitfrankenstein.newspusher.entity.User">
+        select phonenumber,password
+        from user
+        where phonenumber=#{phoneNumber} and password=#{password}
+    </select>
+
+    <insert id="saveUser" keyProperty="id">
+        insert ignore into user(phonenumber, password)
+        values (#{phoneNumber},#{password})
+    </insert>
+</mapper>

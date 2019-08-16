@@ -1,0 +1,174 @@
+@charset "UTF-8";
+body {
+    background: url(../img/login.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.title1 {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    color: #fff;
+    font-size: 36px;
+    letter-spacing: 6px;
+    font-weight: 400;
+    background: rgb(51, 51, 51);
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.table > thead {
+    background: rgb(51, 51, 51);
+    color: #ffffff;
+}
+
+th, td {
+    text-align: center;
+}
+
+th {
+    font-weight: 300;
+}
+
+.table > tbody > tr > td {
+    vertical-align: middle;
+}
+
+.table > tbody > tr {
+    background: rgb(236, 239, 244);
+}
+
+.deepColor {
+    background: rgb(146, 174, 229) !important;
+}
+
+.deepColor2 {
+    background: #5495cc87 !important;;
+    color: aliceblue !important;
+}
+
+#SearchTable th{
+    width: 100px;
+}
+
+#SearchTable td:hover{
+    cursor: pointer;
+}
+
+/*全选按钮样式*/
+.checkboxfour {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: #ddd;
+    border-radius: 100%;
+    position: relative;
+    -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5);
+    -box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.checkboxfour label {
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 100px;
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    -ms-transition: all .5s ease;
+    -transition: all .5s ease;
+    cursor: pointer;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    z-index: 1;
+
+    background: #ddd;
+
+    -webkit-box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.5);
+    -box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.checkboxfour input[type=checkbox]:checked + label {
+    background: #333;
+}
+
+#cbtoExcel, .cbtoExcel {
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 2;
+}
+
+#cbtoExcel, .cbtoExcel:hover {
+    cursor: pointer;
+}
+
+label {
+    color: #868686;
+    font-size: 16px;
+}
+
+input {
+    width: 120px;
+    height: 30px;
+    color: #818181;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+select {
+    height: 30px;
+    width: 100px;
+    padding: 0 0 0 18px;
+    color: #909099;
+    font-size: 15px;
+    border-radius: 5px;
+    float: right;
+}
+
+option {
+    text-align: center;
+    color: #909099;
+}
+
+.pushBtn {
+    width: 100px;
+    color: #fff;
+    display: inline-block;
+    padding: 4px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background: rgb(51, 51, 51) none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    letter-spacing: 4px;
+}
+
+.pushBtn:hover {
+    background-color: rgb(169, 169, 169);
+}
