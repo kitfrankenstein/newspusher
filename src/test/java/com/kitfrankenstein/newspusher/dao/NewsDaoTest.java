@@ -1,13 +1,8 @@
 package com.kitfrankenstein.newspusher.dao;
 
 import com.kitfrankenstein.newspusher.NewsPusherApplicationTests;
-import com.kitfrankenstein.newspusher.util.MqttPropertiesUtil;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.ArrayList;
-
-import static org.junit.Assert.*;
 
 /**
  * @author Kit
@@ -20,6 +15,5 @@ public class NewsDaoTest extends NewsPusherApplicationTests {
 
     @Test
     public void addNewsList() {
-        System.out.println("MqttPropertiesUtil = " + MqttPropertiesUtil.CLEAN_SESSION);
     }
 }

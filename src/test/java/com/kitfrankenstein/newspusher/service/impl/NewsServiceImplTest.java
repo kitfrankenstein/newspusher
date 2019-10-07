@@ -1,14 +1,9 @@
 package com.kitfrankenstein.newspusher.service.impl;
 
 import com.kitfrankenstein.newspusher.NewsPusherApplicationTests;
-import com.kitfrankenstein.newspusher.dao.NewsDao;
 import com.kitfrankenstein.newspusher.service.NewsService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import javax.annotation.Resource;
-
-import static org.junit.Assert.*;
 
 /**
  * @author Kit

@@ -11,5 +11,19 @@ spring:
   thymeleaf:
     cache: false
 mybatis:
-  config-location: classpath:mybatis-config.xml
   mapper-locations: classpath:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    use-generated-keys: true
+mqtt:
+  host:
+    - tcp://:1883
+  client-id: id
+  username: username
+  password: password
+  keep-alive: 30
+  max-inflight: 500
+  clean-session: true
+  timeout: 20000
+  qos: 1
+  async: false

@@ -63,10 +63,11 @@ public class NewsServiceImpl implements NewsService {
                         String media = jO.containsKey("media")
                                 ? jO.getString("media")
                                 : "新浪网";
-                        String imageUrl = jO.containsKey("thumb") ? jO.getString("thumb")
-                                : (jO.containsKey("mthumbs")
-                                ? jO.getJSONArray("mthumbs").getString(0)
-                                : jO.getJSONArray("thumbs").getString(0));
+                        String imageUrl =
+                                jO.containsKey("thumb") ? jO.getString("thumb")
+                                    : (jO.containsKey("mthumbs") ? jO.getJSONArray("mthumbs").getString(0)
+                                        : (jO.containsKey("thumbs") ? jO.getJSONArray("thumbs").getString(0)
+                                            : null));
                         String time = media + " " +
                                 (jO.containsKey("ctime")
                                         ? NewsUtil.stampToDateString(jO.getString("ctime"))

@@ -20,7 +20,13 @@ public class NewsUtil {
 
     public static String stampToDateString(String s){
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        long lt = new Long(s) * 1000L;
+        if (s == null) {
+            return simpleDateFormat.format(new Date());
+        }
+        long lt = new Long(s);
+        if (s.length() < 13) {
+            lt *= 1000L;
+        }
         Date date = new Date(lt);
         return simpleDateFormat.format(date);
     }
