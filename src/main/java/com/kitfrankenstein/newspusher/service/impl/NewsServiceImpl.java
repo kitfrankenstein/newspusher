@@ -10,6 +10,9 @@ import com.kitfrankenstein.newspusher.util.NewsUtil;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -21,12 +24,14 @@ import java.util.List;
  * @author Kit
  * @date: 2019/8/13 13:29
  */
+@CacheConfig(cacheNames = "news", keyGenerator = "keyGenerator")
 @Service
 public class NewsServiceImpl implements NewsService {
 
     @Autowired
     private NewsDao newsDao;
 
+    @CacheEvict(allEntries = true)
     @Override
     public List<News> updateSina() {
         List<News> newsList = new ArrayList<>();
@@ -84,6 +89,7 @@ public class NewsServiceImpl implements NewsService {
         return newsList;
     }
 
+    @CacheEvict(allEntries = true)
     @Override
     public List<News> update163() {
         List<News> newsList = new ArrayList<>();
@@ -128,6 +134,7 @@ public class NewsServiceImpl implements NewsService {
         return newsList;
     }
 
+    @CacheEvict(allEntries = true)
     @Override
     public List<News> updateMChina() {
         List<News> newsList = new ArrayList<>();
@@ -170,26 +177,31 @@ public class NewsServiceImpl implements NewsService {
         return newsList;
     }
 
+    @Cacheable
     @Override
     public int getTableCount(String table) {
         return newsDao.getCount(table);
     }
 
+    @Cacheable
     @Override
     public List<News> getSinaNewsList(int offset, int limit) {
         return newsDao.getNewsListByOffset(NewsUtil.TABLE_SINA, offset, limit);
     }
 
+    @Cacheable
     @Override
     public List<News> get163NewsList(int offset, int limit) {
         return newsDao.getNewsListByOffset(NewsUtil.TABLE_163, offset, limit);
     }
 
+    @Cacheable
     @Override
     public List<News> getMChinaNewsList(int offset, int limit) {
         return newsDao.getNewsListByOffset(NewsUtil.TABLE_MCHINA, offset, limit);
     }
 
+    @Cacheable
     @Override
     public List<News> getNewsList(String table, String lastUrl, int limit) {
         if (table.equals("163")) {
@@ -198,18 +210,7 @@ public class NewsServiceImpl implements NewsService {
         return newsDao.getNewsListByOffset(table, newsDao.getNewsRow(lastUrl, table), limit);
     }
 
-    @Override
-    public List<News> getLatestNews() {
-        List<News> rSina = newsDao.getNewsListByTime(NewsUtil.TABLE_SINA, NewsUtil.getTimeStampAfterMinutes(-10));
-        List<News> r163 = newsDao.getNewsListByTime(NewsUtil.TABLE_163, NewsUtil.getTimeStampAfterMinutes(-10));
-        List<News> rMChina = newsDao.getNewsListByTime(NewsUtil.TABLE_MCHINA, NewsUtil.getTimeStampAfterMinutes(-10));
-        List<News> result = new ArrayList<>();
-        result.addAll(rMChina);
-        result.addAll(r163);
-        result.addAll(rSina);
-        return result;
-    }
-
+    @Cacheable
     @Override
     public List<News> searchNews(String keyword) {
         return newsDao.searchNews(keyword);

@@ -15,7 +15,25 @@ public class NewsServiceImplTest extends NewsPusherApplicationTests {
     private NewsService newsService;
 
     @Test
-    public void updateMChina() {
-        System.out.println("newsService = " + newsService.updateSina());
+    public void getMChina() {
+//        long start = System.currentTimeMillis();
+//        newsService.searchNews("北京");
+//        long end = System.currentTimeMillis();
+//        System.out.println("sql = " + (end - start));
+//
+//        start = System.currentTimeMillis();
+//        newsService.searchNews("北京");
+//        end = System.currentTimeMillis();
+//        System.out.println("redis = " + (end - start));
+//
+//        start = System.currentTimeMillis();
+//        newsService.searchNews("北京");
+//        end = System.currentTimeMillis();
+//        System.out.println("redis2 = " + (end - start));
+//
+//        start = System.currentTimeMillis();
+//        newsService.searchNews("北京");
+//        end = System.currentTimeMillis();
+//        System.out.println("redis3 = " + (end - start));
     }
 }

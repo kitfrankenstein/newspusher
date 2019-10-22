@@ -42,7 +42,7 @@ public class CrawlTask {
         }
     }
 
-    @Scheduled(cron = "0 0/40 * * * ?")
+    @Scheduled(cron = "0 0/30 * * * ?")
     public void crawlSina() {
         try {
             List<News> newsList = newsService.updateSina();

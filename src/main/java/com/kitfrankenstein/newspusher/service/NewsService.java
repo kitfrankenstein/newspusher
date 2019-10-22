@@ -26,8 +26,6 @@ public interface NewsService {
 
     List<News> getNewsList(String table, String lastUrl, int limit);
 
-    List<News> getLatestNews();
-
     List<News> searchNews(String keyword);
 
 }
