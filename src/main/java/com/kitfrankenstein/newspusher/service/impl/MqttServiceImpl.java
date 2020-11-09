@@ -23,15 +23,13 @@ public class MqttServiceImpl implements MqttService {
 
     @Override
     public void publish(String topic, String content) {
-        Message<String> messages = MessageBuilder.withPayload(content).setHeader(MqttHeaders.TOPIC, topic).build();
-        mqttMessageHandler.handleMessage(messages);
+        singlePublish(topic, content);
     }
 
     @Override
     public void publishNews(String topic, String url, String title, String digest) {
         String content = url + "\n" + title + "\n" + digest;
-        Message<String> messages = MessageBuilder.withPayload(content).setHeader(MqttHeaders.TOPIC, topic).build();
-        mqttMessageHandler.handleMessage(messages);
+        publish(topic, content);
     }
 
     @Override
@@ -41,8 +39,15 @@ public class MqttServiceImpl implements MqttService {
             String content = news.getUrl() + "\n"
                     + news.getTitle() + "\n"
                     + news.getDigest() + "\n";
-            Message<String> messages = MessageBuilder.withPayload(content).setHeader(MqttHeaders.TOPIC, topic).build();
-            mqttMessageHandler.handleMessage(messages);
+            publish(topic, content);
         }
+    }
+
+    private void singlePublish(String topic, String content) {
+        Message<String> messages = MessageBuilder.withPayload(content)
+                .setHeader(MqttHeaders.TOPIC, topic)
+                .setHeader(MqttHeaders.RETAINED, true)
+                .build();
+        mqttMessageHandler.handleMessage(messages);
     }
 }
