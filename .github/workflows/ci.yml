@@ -7,15 +7,11 @@ on:
   # push:
   #   branches: [ master ]
   workflow_dispatch:
-    inputs:
-      name:
-        description: 'Person to greet'
-        required: true
-        default: 'Kit'
-      home:
-        description: 'location'
-        required: false
-        default: 'The Octoverse'
+  #  inputs:
+  #    name:
+  #      description: 'Person to greet'
+  #      required: true
+  #      default: 'Kit'
 
 jobs:
   build:
@@ -32,7 +28,7 @@ jobs:
       - name: Deploy
         uses: easingthemes/ssh-deploy@v2.1.5
         env:
-          ARGS: "-avz --delete"
+          ARGS: "-avz --delete --include='*.jar' --exclude=*"
           SSH_PRIVATE_KEY: ${{ secrets.HW_ECS_KEY }}
           REMOTE_HOST: ${{ secrets.HOST }}
           REMOTE_USER: ${{ secrets.USERNAME }}
