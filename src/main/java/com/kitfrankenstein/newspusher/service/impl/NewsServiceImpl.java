@@ -51,7 +51,8 @@ public class NewsServiceImpl implements NewsService {
                         .body()
                         .trim();
                 JSONObject jsonObject = JSON.parseObject(jsonString);
-                JSONArray jA = jsonObject.getJSONArray("data");//取jsonArray
+                //取jsonArray
+                JSONArray jA = jsonObject.getJSONArray("data");
                 for (int j = 0; j < jA.size(); j++) {
                     JSONObject jO = jA.getJSONObject(j);
                     //手机新浪网json格式
@@ -94,13 +95,15 @@ public class NewsServiceImpl implements NewsService {
     public List<News> update163() {
         List<News> newsList = new ArrayList<>();
         String[] categories = {"BBM54PGAwangning", "BAI67OGGwangning", "BA8EE5GMwangning",
-                "BA8D4A3Rwangning", "BA8E6OEOwangning"};//, "BA10TA81wangning", "BDC4QSV3wangning"};
+                "BA8D4A3Rwangning", "BA8E6OEOwangning"};
+        //, "BA10TA81wangning", "BDC4QSV3wangning"};
         //新闻军事财经科技体育//娱乐健康
         String[] tags = {"recommend", "military", "finance", "technology", "sport"};
         String src = "http://3g.163.com/touch/reconstruct/article/list/";
         //手机网易网json数据源
         try {
-            for (int i = 0; i < categories.length; i++) {//每个分类爬二十条
+            //每个分类爬二十条
+            for (int i = 0; i < categories.length; i++) {
                 String temp = Jsoup.connect(src + categories[i] + "/0-20.html")
                         .userAgent(NewsUtil.USER_AGENT)
                         .get()
@@ -144,7 +147,8 @@ public class NewsServiceImpl implements NewsService {
                 "technology", "education"};
         String src = "https://k1.m.china.com.cn/scene/query/list?columnId={0}&page=0&size=30&appId=chinaApp";
         try {
-            for (int i = 0; i < cols.length; i++) {//每个分类爬二十条
+            //每个分类爬二十条
+            for (int i = 0; i < cols.length; i++) {
                 String jsonString = Jsoup.connect(MessageFormat.format(src, cols[i]))
                         .userAgent(NewsUtil.USER_AGENT)
                         .ignoreContentType(true)
@@ -204,7 +208,7 @@ public class NewsServiceImpl implements NewsService {
     @Cacheable
     @Override
     public List<News> getNewsList(String table, String lastUrl, int limit) {
-        if (table.equals("163")) {
+        if ("163".equals(table)) {
             table = NewsUtil.TABLE_163;
         }
         return newsDao.getNewsListByOffset(table, newsDao.getNewsRow(lastUrl, table), limit);

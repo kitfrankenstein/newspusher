@@ -20,12 +20,15 @@ public class UserServiceImpl implements UserService {
     public int login(User user) {
         User existUser = userDao.getUserByPhone(user.getPhoneNumber());
         if (existUser == null) {
-            return 0;//user not found
+            //user not found
+            return 0;
         }
         if (existUser.getPassword().equals(user.getPassword())) {
-            return 1;//user found
+            //user found
+            return 1;
         }
-        return -1;//wrong password
+        //wrong password
+        return -1;
     }
 
     @Override

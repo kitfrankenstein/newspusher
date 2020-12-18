@@ -74,12 +74,19 @@ public class UserController {
         return response;
     }
 
-    @RequestMapping(value = "/download", method = RequestMethod.GET) //匹配的是href中的download请求
+    /**
+     * 匹配的是href中的download请求
+     */
+    @RequestMapping(value = "/download", method = RequestMethod.GET)
     public ResponseEntity<byte[]> download() throws IOException {
-        String downloadFilePath = "/usr";//上传文件夹
-        File file = new File(downloadFilePath + File.separator + "newsPusher.apk");//新建文件
-        HttpHeaders headers = new HttpHeaders();//http头信息
-        String downloadFileName = new String("newsPusher.apk".getBytes(StandardCharsets.UTF_8), StandardCharsets.ISO_8859_1);//设置编码
+        //上传文件夹
+        String downloadFilePath = "/usr";
+        //新建文件
+        File file = new File(downloadFilePath + File.separator + "newsPusher.apk");
+        //http头信息
+        HttpHeaders headers = new HttpHeaders();
+        //设置编码
+        String downloadFileName = new String("newsPusher.apk".getBytes(StandardCharsets.UTF_8), StandardCharsets.ISO_8859_1);
         headers.setContentDispositionFormData("attachment", downloadFileName);
         headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
         //MediaType:互联网媒介类型  contentType：具体请求中的媒体类型信息
